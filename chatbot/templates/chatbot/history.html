@@ -1,0 +1,19 @@
+{% extends 'chatbot/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center text-light">📜 Chat History</h2><br><br>
+    <div class="list-group mt-3">
+        {% for chat in chats %}
+            <div class="list-group-item text-light" style="background-color: rgb(51, 51, 51);border:none;">
+                <p><strong>👤 You:</strong> {{ chat.user_input }}</p>
+                <p class="text-light"><strong>🤖 Bot:</strong></p>
+                <div class="chat-response text-light">
+                    {{ chat.bot_response|safe }}
+                </div>
+                <small class="text-light">🕒 {{ chat.timestamp|date:"M d, Y H:i A" }}</small>
+            </div><br><br>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

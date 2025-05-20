@@ -1,0 +1,64 @@
+{% extends 'chatbot/base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-lg p-4 border-0 text-light" style="width: 400px; border-radius: 12px;background-color: rgb(51, 51, 51);">
+        <h3 class="text-center fw-bold mb-3">Create an Account</h3>
+
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+
+            <!-- Username Field -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Username</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="text-danger small">{{ form.username.errors|join:", " }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="text-danger small">{{ form.email.errors|join:", " }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Password Field -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Password</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <div class="text-danger small">{{ form.password1.errors|join:", " }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Confirm Password</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <div class="text-danger small">{{ form.password2.errors|join:", " }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success w-100 fw-bold">Sign Up</button>
+
+            <!-- General Form Errors -->
+            {% if form.non_field_errors %}
+                <div class="text-danger text-center mt-3 small">
+                    {{ form.non_field_errors|join:", " }}
+                </div>
+            {% endif %}
+        </form>
+
+        <!-- Login Link -->
+        <div class="text-center mt-3">
+            <small>Already have an account? <a href="{% url 'login' %}" class="text-decoration-none fw-bold">Login here</a></small>
+        </div>
+    </div>
+</div>
+{% endblock %}
